@@ -49,6 +49,13 @@ public sealed class DateTimeTools
     #endregion
 
     #region region DateTime Manipulation
+    [McpServerTool, Description("Get the day of the week for a given date.")]
+    public static string GetDayOfWeekForDate(string date)
+    {
+        DateTime dt = DateTime.Parse(date);
+        return dt.DayOfWeek.ToString();
+    }
+
     [McpServerTool, Description("Add days to the current date.")]
     public static string AddDaysToCurrentDate(int days)
     {
