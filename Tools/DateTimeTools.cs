@@ -159,4 +159,35 @@ public sealed class DateTimeTools
             }";
     }
     #endregion
-}                                                                            
+
+    #region region Holiday Information
+    [McpServerTool, Description("Get a list of countries that have holiday information available.")]
+    public static string GetAvailableHolidayCountries()
+    {
+        return @"{
+            ""available_countries"": [
+                { ""name"": ""United States"", ""code"": ""US"" },
+                { ""name"": ""United Kingdom"", ""code"": ""UK"" },
+                { ""name"": ""Canada"", ""code"": ""CA"" },
+                { ""name"": ""Australia"", ""code"": ""AU"" },
+                { ""name"": ""Germany"", ""code"": ""DE"" },
+                { ""name"": ""France"", ""code"": ""FR"" },
+                { ""name"": ""Japan"", ""code"": ""JP"" }
+            ]
+        }";
+    }
+
+    [McpServerTool, Description("Check if holiday information is available for a specific country code.")]
+    public static string IsHolidayDataAvailable(string countryCode)
+    {
+        var availableCountries = new[] { "US", "UK", "CA", "AU", "DE", "FR", "JP" };
+        var isAvailable = availableCountries.Contains(countryCode.ToUpper());
+        
+        return @$"{{
+            ""country_code"": ""{countryCode.ToUpper()}"",
+            ""available"": {isAvailable.ToString().ToLower()},
+            ""message"": ""{(isAvailable ? $"Holiday data is available for {countryCode.ToUpper()}" : $"Holiday data is not available for {countryCode.ToUpper()}. Available countries: {string.Join(", ", availableCountries)}")}"" 
+        }}";
+    }
+    #endregion
+}
