@@ -32,4 +32,13 @@ public static class DateTimePrompts
 
     [McpServerPrompt(Name = "Get available date formats"), Description("Show available date formatting options")]
     public static string GetDateFormatsPrompt() => "What date formats are available for formatting dates?";
+
+    [McpServerPrompt(Name = "List holidays by country"), Description("Get a list of holidays for a specific country")]
+    public static string ListHolidaysByCountryPrompt([Description("Country code (e.g., US, UK, CA, AU, DE, FR, JP)")] string countryCode) => $"What are the major holidays in {countryCode}?";
+
+    [McpServerPrompt(Name = "Show available holiday countries"), Description("Get a list of all countries with holiday information")]
+    public static string ShowAvailableHolidayCountriesPrompt() => "Which countries have holiday information available?";
+
+    [McpServerPrompt(Name = "Holiday information"), Description("Get detailed information about holidays")]
+    public static string HolidayInformationPrompt([Description("Country to get holiday information for")] string country) => $"Tell me about the holidays and their significance in {country}";
 }
